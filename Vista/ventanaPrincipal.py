@@ -7,6 +7,7 @@ from PyQt5 import QtGui
 from Vista.ventanaClientes import VentanaClientes
 from Vista.ventanaEmpleados import VentanaEmpleados
 from Vista.ventanaProductos import VentanaProductos
+from Vista.ventanaComprobante import VentanaComprobante
 
 class VentanaPrincipal(QtWidgets.QMainWindow):
     def __init__(self, parent = None):
@@ -38,6 +39,5 @@ class VentanaPrincipal(QtWidgets.QMainWindow):
     
     # Aviso para la opcion Comprobante
     def abrirVentanaComprobante(self):
-        QtWidgets.QMessageBox.information(self, "Comprobante de Pago",
-                                                  "Esta función todavía no está implementada",
-                                                  QtWidgets.QMessageBox.Ok)
+        vComprobante = VentanaComprobante(self)
+        vComprobante.show()

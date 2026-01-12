@@ -19,7 +19,7 @@ class ArregloComprobantes():
     def tamañoArregloComprobante(self):
         return len(self.dataComprobante)
 
-    def buscarComprobante(self, dni):
+    def buscarComprobante(self, id):
         for i in range (self.tamañoArregloComprobante()):
             if id == self.dataComprobante[i].getIdComprobante():
                 return i
@@ -28,8 +28,8 @@ class ArregloComprobantes():
     def eliminarComprobante(self, pos):
         del(self.dataComprobante[pos])
 
-    def modificarComprobante(self, objcom, pos):
-        self.dataComprobante[pos] = objcom
+    def modificarComprobante(self, objCom, pos):
+        self.dataComprobante[pos] = objCom
 
     def retornarDatos(self):
         return self.dataComprobante

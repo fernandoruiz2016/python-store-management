@@ -3,6 +3,7 @@
 
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
+from PyQt5.QtCore import QDate
 
 from Controlador.arregloComprobantes import ArregloComprobantes, comprobante
 # Creamos el objteo aCom el cual podrá usar todos los métodos de arregloClientes
@@ -10,9 +11,9 @@ aCom = ArregloComprobantes()
 
 # QtGui --> usiliza los botones del formulario
 
-class VentanaClientes(QtWidgets.QMainWindow):
+class VentanaComprobante(QtWidgets.QMainWindow):
     def __init__(self, parent = None):
-        super(VentanaClientes, self).__init__(parent)
+        super(VentanaComprobante, self).__init__(parent)
         uic.loadUi("UI/ventanaComprobantes.ui", self)#==> se debe colocar el nombre y ruta del formulario
         # self.show()
         self.consultado = False #<- Para la funcion Eliminar
@@ -32,9 +33,10 @@ class VentanaClientes(QtWidgets.QMainWindow):
     # Es necesario tener algunos metodos a partir de aqui
     def Carga_Comprobantes(self):
         if aCom.tamañoArregloComprobante()==0:
-            aCom= comprobante('F001','Factura','2026-01-03', 55)
-            aCom.adicionaComprobante(aCom)
-            aCom= comprobante('B001','Boleta','2026-01-04', 20)
+            objCom= comprobante('F001','Factura','2026-01-03', 55)
+            aCom.adicionaComprobante(objCom)
+            objCom= comprobante('B001','Boleta','2026-01-04', 20)
+            aCom.adicionaComprobante(objCom)
             self.listar()
         else:
             self.listar()
@@ -43,7 +45,7 @@ class VentanaClientes(QtWidgets.QMainWindow):
         return self.txtId.text()
     
     def obtenerTipo(self):
-        return self.txtTipo.text()
+        return self.cboTipo.currentText()
 
     def obtenerFecha(self):
         return self.dtFecha.date().toPyDate()
@@ -59,12 +61,15 @@ class VentanaClientes(QtWidgets.QMainWindow):
         if self.txtId.text() =="":
             self.txtId.setFocus()
             return "Id del comprobante...!!!"
-        elif self.txtTipo.text()=="":
-            self.txtTipo.setFocus()
+        elif self.cboTipo.currentIndex()==0:
+            self.cboTipo.setFocus()
             return "Tipo del comprobante...!!!"
-        elif self.dtFecha.text()=="":
+        elif self.dtFecha.date()==QDate(2000, 1, 1):
             self.dtFecha.setFocus()
             return "Fecha del comprobante...!!!"
+        elif self.dtFecha.date() > QDate.currentDate():
+            self.dtFecha.setFocus()
+            return "Fecha del comprobante no válida...!!!"
         elif self.txtTotal.text()=="":
             self.txtTotal.setFocus()
             return "Importe total del comprobante...!!!"
@@ -73,33 +78,31 @@ class VentanaClientes(QtWidgets.QMainWindow):
 
     def listar(self):
         self.tblComprobantes.setRowCount(aCom.tamañoArregloComprobante())
-        self.tblComprobantes.setColumnCount(6)
+        self.tblComprobantes.setColumnCount(4)
         #Cabecera
         self.tblComprobantes.verticalHeader().setVisible(False)
         for i in range (0, aCom.tamañoArregloComprobante()):
-            self.tblComprobantes.setItem(i, 0, QtWidgets.QTableWidgetItem(aCom.devolverCliente(i).getIdComprobante()))
-            self.tblComprobantes.setItem(i, 1, QtWidgets.QTableWidgetItem(aCom.devolverCliente(i).getTipo()))
-            self.tblComprobantes.setItem(i, 2, QtWidgets.QTableWidgetItem(aCom.devolverCliente(i).getFecha()))
-            self.tblComprobantes.setItem(i, 3, QtWidgets.QTableWidgetItem(aCom.devolverCliente(i).getTotal()))
+            self.tblComprobantes.setItem(i, 0, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(i).getIdComprobante()))
+            self.tblComprobantes.setItem(i, 1, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(i).getTipo()))
+            self.tblComprobantes.setItem(i, 2, QtWidgets.QTableWidgetItem(str(aCom.devolverComprobante(i).getFecha())))
+            self.tblComprobantes.setItem(i, 3, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(i).getTotal()))
         self.consultado = False
 
     def limpiarControles(self):
         self.txtId.clear()
-        self.txtTipo.clear()
-        self.dtFecha.clear()
-        self.txtTotal.clear()
-        self.txtDireccion.clear()
-        self.txtTelefono.clear()
+        self.cboTipo.setCurrentIndex(0)
+        self.dtFecha.setDate(QDate(2000, 1, 1))
+        self.txtTotal.setText("S/. ")
 
     # Mantenimientos (Grabar (Registrar), Consultar, Modificar, Listar, Quitar)
     def registrar(self):
         if self.valida() == "":
-            aCom= comprobante(self.obtenerId(), self.obtenerTipo(),
+            objCom= comprobante(self.obtenerId(), self.obtenerTipo(),
                             self.obtenerFecha(),
                             self.obtenerTotal())
             id=self.obtenerId()
             if aCom.buscarComprobante(id) == -1:
-                aCom.adicionaComprobante(aCom)
+                aCom.adicionaComprobante(objCom)
                 aCom.grabar()
                 self.limpiarControles()
                 self.listar()
@@ -126,16 +129,16 @@ class VentanaClientes(QtWidgets.QMainWindow):
                                                   "El Id ingresado no existe... !!!",
                                                   QtWidgets.QMessageBox.Ok)
             else:
-                self.txtId.setText(aCom.devolverCliente(pos).getIdComprobante())
-                self.txtTipo.setText(aCom.devolverCliente(pos).getTipo())
-                self.dtFecha.setText(aCom.devolverCliente(pos).getFecha())
-                self.txtTotal.setText(aCom.devolverCliente(pos).getTotal())
+                self.txtId.setText(aCom.devolverComprobante(pos).getIdComprobante())
+                self.cboTipo.setCurrentText(aCom.devolverComprobante(pos).getTipo())
+                self.dtFecha.setDate(aCom.devolverComprobante(pos).getFecha())
+                self.txtTotal.setText(aCom.devolverComprobante(pos).getTotal())
 
                 self.tblComprobantes.setRowCount(1)
-                self.tblComprobantes.setItem(0,0, QtWidgets.QTableWidgetItem(aCom.devolverCliente(pos).getIdComprobante()))
-                self.tblComprobantes.setItem(0,1, QtWidgets.QTableWidgetItem(aCom.devolverCliente(pos).getTipo()))
-                self.tblComprobantes.setItem(0,2, QtWidgets.QTableWidgetItem(aCom.devolverCliente(pos).getFecha()))
-                self.tblComprobantes.setItem(0,3, QtWidgets.QTableWidgetItem(aCom.devolverCliente(pos).getTotal()))
+                self.tblComprobantes.setItem(0,0, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(pos).getIdComprobante()))
+                self.tblComprobantes.setItem(0,1, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(pos).getTipo()))
+                self.tblComprobantes.setItem(0,2, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(pos).getFecha()))
+                self.tblComprobantes.setItem(0,3, QtWidgets.QTableWidgetItem(aCom.devolverComprobante(pos).getTotal()))
 
                 self.consultado = True
 
@@ -176,11 +179,9 @@ class VentanaClientes(QtWidgets.QMainWindow):
         fila = self.tblComprobantes.currentRow()
 
         self.txtId.setText(self.tblComprobantes.item(fila,0).text())
-        self.txtTipo.setText(self.tblComprobantes.item(fila,1).text())
-        self.dtFecha.setText(self.tblComprobantes.item(fila,2).text())
+        self.cboTipo.setCurrentText(self.tblComprobantes.item(fila,1).text())
+        self.dtFecha.setDate(QDate.fromString(self.tblComprobantes.item(fila,2).text(), "yyyy-MM-dd"))
         self.txtTotal.setText(self.tblComprobantes.item(fila,3).text())
-        self.txtDireccion.setText(self.tblComprobantes.item(fila,4).text())
-        self.txtTelefono.setText(self.tblComprobantes.item(fila,5).text())
 
     def modificar(self):
         if aCom.tamañoArregloComprobante() == 0:
@@ -198,10 +199,10 @@ class VentanaClientes(QtWidgets.QMainWindow):
                 pos= aCom.buscarComprobante(id)
                 if pos != -1:
                     if self.valida() == "":
-                        aCom= comprobante(self.obtenerId(), self.obtenerTipo(),
+                        objCom= comprobante(self.obtenerId(), self.obtenerTipo(),
                                         self.obtenerFecha(),
                                         self.obtenerTotal())
-                        aCom.modificarComprobante(aCom, pos)
+                        aCom.modificarComprobante(objCom, pos)
                         aCom.grabar()
                         self.limpiarControles()
                         self.listar()
