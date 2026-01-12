@@ -4,25 +4,26 @@ Este proyecto es un sistema de gestión de una tienda desarrollado en **Python**
 
 El sistema está organizado en distintas secciones accesibles desde una ventana principal, facilitando la navegación y el uso.
 
-## 📋 Funcionalidades
+---
+## Funcionalidades
 
 El sistema cuenta con las siguientes opciones:
 
-### 🏠 Ventana Principal
+### Ventana Principal
 - Punto de acceso central a todas las funcionalidades del sistema.
 - Permite navegar entre clientes, empleados, productos y comprobantes.
 
-### 👥 Gestión de Clientes
+### Gestión de Clientes
 - Registrar nuevos clientes.
 - Consultar información de clientes existentes.
 - Actualizar y eliminar clientes.
 
-### 👨‍💼 Gestión de Empleados
+### Gestión de Empleados
 - Registro de empleados.
 - Visualización de datos del personal.
 - Modificación y eliminación de empleados.
 
-### 📦 Gestión de Productos
+### Gestión de Productos
 - Registro de productos.
 - Control de precios y stock.
 - Edición y eliminación de productos.
@@ -32,7 +33,7 @@ El sistema cuenta con las siguientes opciones:
 - Asociación de clientes y productos.
 - Registro de transacciones realizadas.
 
-
+---
 ## Tecnologías Utilizadas
 
 - Lenguaje: Python
