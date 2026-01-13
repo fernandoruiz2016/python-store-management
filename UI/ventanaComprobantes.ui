@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background: white;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnListar">
     <property name="geometry">
@@ -23,8 +26,23 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Listar</string>
@@ -39,8 +57,23 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Eliminar</string>
@@ -55,8 +88,23 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Modificar</string>
@@ -75,13 +123,23 @@
      <font>
       <family>MS Shell Dlg 2</family>
       <pointsize>11</pointsize>
-      <weight>9</weight>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Registrar</string>
@@ -96,8 +154,23 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Quitar</string>
@@ -112,24 +185,26 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};font: 75 11pt &quot;MS Shell Dlg 2&quot;;</string>
     </property>
     <property name="text">
      <string>Consultar</string>
-    </property>
-   </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>851</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtTotal">
@@ -140,6 +215,11 @@
       <width>161</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <property name="text">
      <string>S/. </string>
@@ -154,15 +234,49 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
+    </property>
    </widget>
    <widget class="QTableWidget" name="tblComprobantes">
     <property name="geometry">
      <rect>
       <x>300</x>
       <y>140</y>
-      <width>511</width>
+      <width>501</width>
       <height>341</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+    gridline-color: #e0e0e0;
+    border: 1px solid #786DA0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #7855F6;
+}
+
+QHeaderView::section {
+    background-color: #7855F6;
+    color: white;
+    padding: 6px;
+    font-weight: bold;
+}
+
+QTableWidget::item:selected {
+    background-color: #cfc6ff;
+    color: black;
+}
+
+QTableWidget::item:hover {
+    background-color: #eae6ff;
+}
+
+QTableWidget QScrollBar:horizontal {
+    height: 0px;
+}</string>
     </property>
     <column>
      <property name="text">
@@ -185,30 +299,6 @@
      </property>
     </column>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>20</y>
-      <width>441</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Arial</family>
-      <pointsize>18</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>REGISTRO COMPROBANTES</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
@@ -225,6 +315,10 @@
       <weight>50</weight>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
     </property>
     <property name="text">
      <string>Id:</string>
@@ -247,6 +341,10 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Tipo:</string>
     </property>
@@ -255,7 +353,7 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>270</y>
+      <y>280</y>
       <width>161</width>
       <height>21</height>
      </rect>
@@ -267,6 +365,10 @@
       <weight>50</weight>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
     </property>
     <property name="text">
      <string>Fecha:</string>
@@ -289,25 +391,12 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Total:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>490</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: green;
-</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00aa00;&quot;&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QDateEdit" name="dtFecha">
@@ -318,6 +407,11 @@
       <width>161</width>
       <height>22</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <property name="minimumDate">
      <date>
@@ -336,6 +430,11 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
+    </property>
     <item>
      <property name="text">
       <string>[Seleccionar tipo]</string>
@@ -352,6 +451,86 @@
      </property>
     </item>
    </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>30</y>
+      <width>341</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: tahoma;
+font-style: bold;
+font-size: 16pt;</string>
+    </property>
+    <property name="text">
+     <string>REGISTRO COMPROBANTES</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>851</width>
+      <height>4</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #786DA0;
+min-height: 2px;
+max-height: 2px;</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>490</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <zorder>btnListar</zorder>
+   <zorder>btnEliminar</zorder>
+   <zorder>btnModificar</zorder>
+   <zorder>btnRegistrar</zorder>
+   <zorder>btnQuitar</zorder>
+   <zorder>btnConsultar</zorder>
+   <zorder>tblComprobantes</zorder>
+   <zorder>label_9</zorder>
+   <zorder>label_11</zorder>
+   <zorder>label_12</zorder>
+   <zorder>label_13</zorder>
+   <zorder>dtFecha</zorder>
+   <zorder>cboTipo</zorder>
+   <zorder>label_3</zorder>
+   <zorder>line_2</zorder>
+   <zorder>txtId</zorder>
+   <zorder>txtTotal</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

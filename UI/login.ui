@@ -7,17 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>315</width>
-    <height>416</height>
+    <height>407</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background: white;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="txtUsuario">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>120</y>
       <width>221</width>
       <height>31</height>
@@ -28,6 +31,12 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px;
+padding-left: 10px;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -35,19 +44,33 @@
    <widget class="QPushButton" name="btnIniciar">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>270</y>
+      <x>120</x>
+      <y>260</y>
       <width>91</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Rockwell Extra Bold</family>
+      <family>Arial</family>
       <pointsize>11</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton#btnIniciar {
+background: #7855F6;
+color: white;
+border-radius: 10px;
+}
+
+QPushButton#btnIniciar:hover {
+background-color: #6a45e5;
+}</string>
     </property>
     <property name="text">
      <string>INICIAR</string>
@@ -56,7 +79,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>100</x>
       <y>170</y>
       <width>131</width>
       <height>31</height>
@@ -64,35 +87,44 @@
     </property>
     <property name="font">
      <font>
+      <family>Segoe UI</family>
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6</string>
+    </property>
     <property name="text">
-     <string>Contraseña:</string>
+     <string>Contraseña</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>80</y>
-      <width>101</width>
+      <x>120</x>
+      <y>90</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Segoe UI</family>
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
-     <string>Usuario:</string>
+     <string>Usuario</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtPassword">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>50</x>
       <y>200</y>
       <width>221</width>
       <height>31</height>
@@ -103,6 +135,12 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px;
+padding-left: 10px;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -110,24 +148,24 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>340</y>
-      <width>101</width>
+      <x>120</x>
+      <y>330</y>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: green;
+     <string notr="true">color: #7855F6;
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00aa00;&quot;&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>60</x>
+      <x>70</x>
       <y>30</y>
       <width>211</width>
       <height>31</height>
@@ -135,18 +173,30 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <family>Tahoma</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
+     <string notr="true">color: #7855F6;
+font: tahoma;
+font-style: bold;
+font-size: 16pt;</string>
     </property>
     <property name="text">
      <string>INICIAR SESION</string>
     </property>
    </widget>
+   <zorder>btnIniciar</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_2</zorder>
+   <zorder>txtPassword</zorder>
+   <zorder>label</zorder>
+   <zorder>label_5</zorder>
+   <zorder>txtUsuario</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

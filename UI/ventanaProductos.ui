@@ -7,11 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>890</width>
-    <height>840</height>
+    <height>860</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background: white;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="txtCodigo">
@@ -19,7 +22,7 @@
      <rect>
       <x>20</x>
       <y>180</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -28,18 +31,10 @@
       <pointsize>10</pointsize>
      </font>
     </property>
-   </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>821</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -55,6 +50,10 @@
      <font>
       <pointsize>11</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
     </property>
     <property name="text">
      <string>Codigo:</string>
@@ -74,6 +73,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Nombre:</string>
     </property>
@@ -83,7 +86,7 @@
      <rect>
       <x>20</x>
       <y>250</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -91,6 +94,11 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -107,6 +115,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Descripción:</string>
     </property>
@@ -116,9 +128,14 @@
      <rect>
       <x>20</x>
       <y>320</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtStockMinimo">
@@ -126,7 +143,7 @@
      <rect>
       <x>20</x>
       <y>390</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -134,6 +151,11 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
@@ -150,6 +172,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Stock Minimo:</string>
     </property>
@@ -159,7 +185,7 @@
      <rect>
       <x>20</x>
       <y>460</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -167,6 +193,11 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <property name="text">
      <string/>
@@ -186,6 +217,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Stock Actual:</string>
     </property>
@@ -195,7 +230,7 @@
      <rect>
       <x>20</x>
       <y>530</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -203,6 +238,11 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <property name="text">
      <string>S/. </string>
@@ -222,6 +262,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Precio Costo:</string>
     </property>
@@ -231,7 +275,7 @@
      <rect>
       <x>20</x>
       <y>600</y>
-      <width>121</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
@@ -239,6 +283,11 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <property name="text">
      <string>S/. </string>
@@ -258,6 +307,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Precio Venta:</string>
     </property>
@@ -276,6 +329,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Proveedor:</string>
     </property>
@@ -293,6 +350,11 @@
      <font>
       <pointsize>9</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <item>
      <property name="text">
@@ -334,6 +396,10 @@
       <pointsize>11</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+font: inter</string>
+    </property>
     <property name="text">
      <string>Almacén:</string>
     </property>
@@ -351,6 +417,11 @@
      <font>
       <pointsize>9</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 5px</string>
     </property>
     <item>
      <property name="text">
@@ -386,6 +457,32 @@
       <width>621</width>
       <height>621</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+    gridline-color: #e0e0e0;
+    border: 1px solid #786DA0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #7855F6;
+}
+
+QHeaderView::section {
+    background-color: #7855F6;
+    color: white;
+    padding: 6px;
+    font-weight: bold;
+}
+
+QTableWidget::item:selected {
+    background-color: #cfc6ff;
+    color: black;
+}
+
+QTableWidget::item:hover {
+    background-color: #eae6ff;
+}
+</string>
     </property>
     <column>
      <property name="text">
@@ -436,8 +533,8 @@
    <widget class="QPushButton" name="btnRegistrar">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>80</y>
+      <x>230</x>
+      <y>90</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -450,6 +547,19 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
+    </property>
     <property name="text">
      <string>Registrar</string>
     </property>
@@ -457,8 +567,8 @@
    <widget class="QPushButton" name="btnConsultar">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>80</y>
+      <x>340</x>
+      <y>90</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -471,6 +581,19 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
+    </property>
     <property name="text">
      <string>Consultar</string>
     </property>
@@ -478,8 +601,8 @@
    <widget class="QPushButton" name="btnModificar">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>80</y>
+      <x>560</x>
+      <y>90</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -492,6 +615,19 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
+    </property>
     <property name="text">
      <string>Modificar</string>
     </property>
@@ -499,8 +635,8 @@
    <widget class="QPushButton" name="btnEliminar">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>80</y>
+      <x>460</x>
+      <y>90</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -513,6 +649,19 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
+    </property>
     <property name="text">
      <string>Eliminar</string>
     </property>
@@ -521,8 +670,8 @@
     <property name="geometry">
      <rect>
       <x>760</x>
-      <y>80</y>
-      <width>71</width>
+      <y>90</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -533,6 +682,19 @@
       <weight>50</weight>
       <bold>false</bold>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Quitar</string>
@@ -541,9 +703,9 @@
    <widget class="QPushButton" name="btnListar">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>80</y>
-      <width>71</width>
+      <x>670</x>
+      <y>90</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -555,49 +717,83 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
+    </property>
     <property name="text">
      <string>Listar</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>25</y>
-      <width>361</width>
+      <x>290</x>
+      <y>30</y>
+      <width>331</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
+     <string notr="true">color: #7855F6;
+font: tahoma;
+font-style: bold;
+font-size: 16pt;</string>
     </property>
     <property name="text">
      <string>REGISTRO DE PRODUCTOS</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>780</y>
-      <width>101</width>
+      <x>30</x>
+      <y>70</y>
+      <width>831</width>
+      <height>4</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #786DA0;
+min-height: 2px;
+max-height: 2px;</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>800</y>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: green;
+     <string notr="true">color: #7855F6;
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00aa00;&quot;&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>

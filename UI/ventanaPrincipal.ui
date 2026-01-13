@@ -7,18 +7,21 @@
     <x>0</x>
     <y>0</y>
     <width>285</width>
-    <height>412</height>
+    <height>428</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background: white;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnComprobante">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>220</y>
+      <y>230</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -27,14 +30,23 @@
      <font>
       <family>MS Shell Dlg 2</family>
       <pointsize>12</pointsize>
-      <weight>9</weight>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Comprobante de Pago</string>
@@ -44,10 +56,15 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>50</y>
+      <y>60</y>
       <width>241</width>
-      <height>16</height>
+      <height>4</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: #786DA0;
+min-height: 2px;
+max-height: 2px;</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -57,14 +74,28 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>170</y>
+      <y>180</y>
       <width>221</width>
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Registro de Productos</string>
@@ -74,7 +105,7 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>120</y>
+      <y>130</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -83,14 +114,23 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
      <font>
       <family>MS Shell Dlg 2</family>
       <pointsize>12</pointsize>
-      <weight>9</weight>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Registro de Empleados</string>
@@ -100,7 +140,7 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>270</y>
+      <y>300</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -109,14 +149,21 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
      <font>
       <family>MS Shell Dlg 2</family>
       <pointsize>12</pointsize>
-      <weight>9</weight>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton#btnSalir {
+background: #FA907D;
+color: black;
+border-radius: 10px;
+}
+
+QPushButton#btnSalir:hover {
+background-color: #FA4E42;
+}</string>
     </property>
     <property name="text">
      <string>Cerrar</string>
@@ -127,20 +174,23 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
      <rect>
       <x>40</x>
       <y>30</y>
-      <width>201</width>
+      <width>231</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>14</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: rgb(85, 0, 0);</string>
+     <string notr="true">color: #7855F6;
+font: tahoma;
+font-style: bold;
+font-size: 16pt;</string>
     </property>
     <property name="text">
      <string>MENU PRINCIPAL</string>
@@ -150,7 +200,7 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>70</y>
+      <y>80</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -159,34 +209,43 @@ font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
      <font>
       <family>MS Shell Dlg 2</family>
       <pointsize>12</pointsize>
-      <weight>9</weight>
+      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
-font: 75 12pt &quot;MS Shell Dlg 2&quot;;</string>
+     <string notr="true">QPushButton {
+color: #7855F6;
+border: 1px solid #786DA0;
+border-radius: 10px
+}
+
+QPushButton:hover {
+color: white;
+background: #7855F6;
+border: 1px solid white;
+};</string>
     </property>
     <property name="text">
      <string>Registro de Clientes</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>320</y>
-      <width>101</width>
+      <y>350</y>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: green;
+     <string notr="true">color: #7855F6;
 </string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#00aa00;&quot;&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span&gt;Fernando Ruiz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
