@@ -3,6 +3,7 @@
 
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
+import re
 
 from Controlador.arregloProductos import ArregloProductos, producto
 # Creamos el objteo aPro el cual podrá usar todos los métodos de arregloProductos
@@ -79,6 +80,9 @@ class VentanaProductos(QtWidgets.QMainWindow):
         if self.txtCodigo.text() =="":
             self.txtCodigo.setFocus()
             return "Codigo del producto...!!!"
+        if not re.match(r"^P\d{2,}$", self.txtCodigo.text()):
+            self.txtCodigo.setFocus()
+            return "Código inválido. Ejemplo: P01, P10, P100"
         elif self.txtNombre.text()=="":
             self.txtNombre.setFocus()
             return "Nombre del producto...!!!"

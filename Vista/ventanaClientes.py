@@ -70,6 +70,12 @@ class VentanaClientes(QtWidgets.QMainWindow):
         if self.txtDni.text() =="":
             self.txtDni.setFocus()
             return "DNI del cliente...!!!"
+        elif not self.txtDni.text().isdigit():
+            self.txtDni.setFocus()
+            return "DNI debe contener solo números"
+        elif len(self.txtDni.text()) != 8:
+            self.txtDni.setFocus()
+            return "DNI debe tener 8 dígitos"
         elif self.txtNombres.text()=="":
             self.txtNombres.setFocus()
             return "Nombre del cliente...!!!"

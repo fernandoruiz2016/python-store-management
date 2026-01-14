@@ -70,6 +70,12 @@ class VentanaEmpleados(QtWidgets.QMainWindow):
         if self.txtDni.text() =="":
             self.txtDni.setFocus()
             return "DNI del empleado...!!!"
+        if not self.txtDni.text().isdigit():
+            self.txtDni.setFocus()
+            return "DNI debe contener solo números"
+        if len(self.txtDni.text()) != 8:
+            self.txtDni.setFocus()
+            return "DNI debe tener 8 dígitos"
         elif self.txtNombres.text()=="":
             self.txtNombres.setFocus()
             return "Nombre del empleado...!!!"

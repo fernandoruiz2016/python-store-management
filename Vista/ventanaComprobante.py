@@ -4,6 +4,7 @@
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 from PyQt5.QtCore import QDate
+import re
 
 from Controlador.arregloComprobantes import ArregloComprobantes, comprobante
 # Creamos el objteo aCom el cual podrá usar todos los métodos de arregloClientes
@@ -61,16 +62,26 @@ class VentanaComprobante(QtWidgets.QMainWindow):
         if self.txtId.text() =="":
             self.txtId.setFocus()
             return "Id del comprobante...!!!"
-        elif self.cboTipo.currentIndex()==0:
+        if self.obtenerTipo() == "Boleta":
+            if not re.match(r"^B-\d{3}$", self.obtenerId()):
+                self.txtId.setFocus()
+                return "Formato inválido de Boleta. Ej: B-001"
+
+        elif self.obtenerTipo() == "Factura":
+            if not re.match(r"^F-\d{3}$", self.obtenerId()):
+                self.txtId.setFocus()
+                return "Formato inválido de Factura. Ej: F-001"
+
+        if self.cboTipo.currentIndex()==0:
             self.cboTipo.setFocus()
             return "Tipo del comprobante...!!!"
-        elif self.dtFecha.date()==QDate(2000, 1, 1):
+        if self.dtFecha.date()==QDate(2000, 1, 1):
             self.dtFecha.setFocus()
             return "Fecha del comprobante...!!!"
-        elif self.dtFecha.date() > QDate.currentDate():
+        if self.dtFecha.date() > QDate.currentDate():
             self.dtFecha.setFocus()
             return "Fecha del comprobante no válida...!!!"
-        elif self.txtTotal.text()=="":
+        if self.txtTotal.text()=="":
             self.txtTotal.setFocus()
             return "Importe total del comprobante...!!!"
         else:
