@@ -80,9 +80,9 @@ class VentanaProductos(QtWidgets.QMainWindow):
         if self.txtCodigo.text() =="":
             self.txtCodigo.setFocus()
             return "Codigo del producto...!!!"
-        if not re.match(r"^P\d{2,}$", self.txtCodigo.text()):
+        if not re.match(r"^P\d{3}$", self.txtCodigo.text()):
             self.txtCodigo.setFocus()
-            return "Código inválido. Ejemplo: P01, P10, P100"
+            return "Código inválido. Ejemplo: P001, P002, P003"
         elif self.txtNombre.text()=="":
             self.txtNombre.setFocus()
             return "Nombre del producto...!!!"

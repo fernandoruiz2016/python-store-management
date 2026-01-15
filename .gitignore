@@ -1,0 +1,32 @@
+# Archivos Python compilados
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+venv/
+.env/
+.envrc/
+
+# Archivos de Qt / PyQt
+*.ui.autosave
+*.qrc
+*.qrc.py
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Configuración IDE
+.vscode/
+.idea/
+
+# Base de datos local
+*.db
+
+# Archivos temporales
+*.tmp
+*.bak
