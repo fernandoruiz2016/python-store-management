@@ -4,11 +4,9 @@
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 
-from Controlador.arregloClientes import ArregloClientes, cliente
-# Creamos el objteo aCli el cual podrá usar todos los métodos de arregloClientes
-aCli = ArregloClientes()
+from Controlador.ClienteController import ClienteController, cliente
 
-# QtGui --> usiliza los botones del formulario
+# QtGui --> utiliza los botones del formulario
 
 class VentanaClientes(QtWidgets.QMainWindow):
     def __init__(self, parent = None):
@@ -30,19 +28,19 @@ class VentanaClientes(QtWidgets.QMainWindow):
         self.listar()
 
     # Es necesario tener algunos metodos a partir de aqui
-    def Carga_Clientes(self):
-        if aCli.tamañoArregloCliente()==0:
-            objCli= cliente('08693923','Alberto','Cordero','Zamorano','Jr. Quezada 221','4585985')
-            aCli.adicionaCliente(objCli)
-            objCli= cliente('08693923','Juan','Perez','Sanchez','Jr. Cuzco 123','3722754')
-            aCli.adicionaCliente(objCli)
-            objCli= cliente('08693923','Cesar','Cespedes','Ramos','Av. Peru 162','2752854')
-            aCli.adicionaCliente(objCli)
-            objCli= cliente('08693923','Roberto','Chambi','Rojas','Jr. Cuzco 222','5714764')
-            aCli.adicionaCliente(objCli)
-            self.listar()
-        else:
-            self.listar()
+    # def Carga_Clientes(self):
+    #     if aCli.tamañoArregloCliente()==0:
+    #         objCli= cliente('08693923','Alberto','Cordero','Zamorano','Jr. Quezada 221','4585985')
+    #         aCli.adicionaCliente(objCli)
+    #         objCli= cliente('08693923','Juan','Perez','Sanchez','Jr. Cuzco 123','3722754')
+    #         aCli.adicionaCliente(objCli)
+    #         objCli= cliente('08693923','Cesar','Cespedes','Ramos','Av. Peru 162','2752854')
+    #         aCli.adicionaCliente(objCli)
+    #         objCli= cliente('08693923','Roberto','Chambi','Rojas','Jr. Cuzco 222','5714764')
+    #         aCli.adicionaCliente(objCli)
+    #         self.listar()
+    #     else:
+    #         self.listar()
 
     def obtenerDni(self):
         return self.txtDni.text()
@@ -95,17 +93,19 @@ class VentanaClientes(QtWidgets.QMainWindow):
             return ""
 
     def listar(self):
-        self.tblClientes.setRowCount(aCli.tamañoArregloCliente())
+        clientes = ClienteController.listar()
+        
+        self.tblClientes.setRowCount(len(clientes))
         self.tblClientes.setColumnCount(6)
         #Cabecera
         self.tblClientes.verticalHeader().setVisible(False)
-        for i in range (0, aCli.tamañoArregloCliente()):
-            self.tblClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getDniCliente()))
-            self.tblClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getNombresCliente()))
-            self.tblClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getApellidoPaternoCliente()))
-            self.tblClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getApellidoMaternoCliente()))
-            self.tblClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getDireccionCliente()))
-            self.tblClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(aCli.devolverCliente(i).getTelefonoCliente()))
+        for i,cli in range (0, len(clientes)):
+            self.tblClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(cli.getDniCliente()))
+            self.tblClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cli.getNombresCliente()))
+            self.tblClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cli.getApellidoPaternoCliente()))
+            self.tblClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(cli.getApellidoMaternoCliente()))
+            self.tblClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(cli.getDireccionCliente()))
+            self.tblClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(cli.getTelefonoCliente()))
         self.consultado = False
 
     def limpiarControles(self):
@@ -125,9 +125,8 @@ class VentanaClientes(QtWidgets.QMainWindow):
                             self.obtenerDireccion(),
                             self.obtenerTelefono())
             dni=self.obtenerDni()
-            if aCli.buscarCliente(dni) == -1:
-                aCli.adicionaCliente(objCli)
-                aCli.grabar()
+            if not ClienteController.buscar(dni):
+                ClienteController.registrar(objCli)
                 self.limpiarControles()
                 self.listar()
             else:
@@ -140,15 +139,15 @@ class VentanaClientes(QtWidgets.QMainWindow):
 
     def consultar(self):
         #self.limpiarTabla()
-        if aCli.tamañoArregloCliente() == 0:
+        if len(ClienteController.listar()) == 0:
                 QtWidgets.QMessageBox.information(self, "Consultar Cliente",
                                                   "No existe clientes a consultar... !!!",
                                                   QtWidgets.QMessageBox.Ok)
         else:
             dni, _ = QtWidgets.QInputDialog.getText(self, "Consultar Cliente",
                                                   "Ingrese el DNI a consultar")
-            pos = aCli.buscarCliente(dni)
-            if pos == -1:
+            pos = ClienteController.buscar(dni)
+            if not pos:
                 QtWidgets.QMessageBox.information(self, "Consultar Cliente",
                                                   "El DNI ingresado no existe... !!!",
                                                   QtWidgets.QMessageBox.Ok)

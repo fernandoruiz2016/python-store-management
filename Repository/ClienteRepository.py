@@ -4,7 +4,7 @@ from Modelo.clientes import cliente
 class ClienteRepository:
 
     @staticmethod
-    def insertar(cliente):
+    def registrar(cliente):
         conn = get_connection()
         cursor = conn.cursor()
 

@@ -1,25 +1,22 @@
-from Modelo.clientes import cliente
 from Repository.ClienteRepository import ClienteRepository
 
 class ClienteController():
 
     @staticmethod
-    def insertar(datos):
-        cli = cliente(*datos)
-        return ClienteRepository.insertar(cli)
+    def registrar(cliente):
+        return ClienteRepository.registrar(cliente)
 
     @staticmethod
     def listar():
         return ClienteRepository.listar()
 
     @staticmethod
-    def buscar_por_dni(dni):
+    def buscar(dni):
         return ClienteRepository.buscar(dni)
 
     @staticmethod
-    def modificar(datos):
-        cli = cliente(*datos)
-        return ClienteRepository.modificar(cli)
+    def modificar(cliente):
+        return ClienteRepository.modificar(cliente)
 
     @staticmethod
     def eliminar(dni):
