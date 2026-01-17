@@ -94,20 +94,23 @@ class VentanaClientes(QtWidgets.QMainWindow):
             return ""
 
     def listar(self):
-        clientes = ClienteController.listar()
-        
-        self.tblClientes.setRowCount(len(clientes))
-        self.tblClientes.setColumnCount(6)
-        #Cabecera
-        self.tblClientes.verticalHeader().setVisible(False)
-        for i,cli in enumerate(clientes):
-            self.tblClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(cli.getDniCliente()))
-            self.tblClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cli.getNombresCliente()))
-            self.tblClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cli.getApellidoPaternoCliente()))
-            self.tblClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(cli.getApellidoMaternoCliente()))
-            self.tblClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(cli.getDireccionCliente()))
-            self.tblClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(cli.getTelefonoCliente()))
-        self.consultado = False
+        try:
+            clientes = ClienteController.listar()
+            
+            self.tblClientes.setRowCount(len(clientes))
+            self.tblClientes.setColumnCount(6)
+            #Cabecera
+            self.tblClientes.verticalHeader().setVisible(False)
+            for i,cli in enumerate(clientes):
+                self.tblClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(cli.getDniCliente()))
+                self.tblClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cli.getNombresCliente()))
+                self.tblClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cli.getApellidoPaternoCliente()))
+                self.tblClientes.setItem(i, 3, QtWidgets.QTableWidgetItem(cli.getApellidoMaternoCliente()))
+                self.tblClientes.setItem(i, 4, QtWidgets.QTableWidgetItem(cli.getDireccionCliente()))
+                self.tblClientes.setItem(i, 5, QtWidgets.QTableWidgetItem(cli.getTelefonoCliente()))
+            self.consultado = False
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def limpiarControles(self):
         self.txtDni.clear()
@@ -119,85 +122,95 @@ class VentanaClientes(QtWidgets.QMainWindow):
 
     # Mantenimientos (Grabar (Registrar), Consultar, Modificar, Listar, Quitar)
     def registrar(self):
-        if self.valida() == "":
-            objCli= cliente(self.obtenerDni(), self.obtenerNombres(),
-                            self.obtenerApellidoPaterno(),
-                            self.obtenerApellidoMaterno(),
-                            self.obtenerDireccion(),
-                            self.obtenerTelefono())
-            dni=self.obtenerDni()
-            if not ClienteController.buscar(dni):
-                ClienteController.registrar(objCli)
-                self.limpiarControles()
-                self.listar()
+        try:
+            if self.valida() == "":
+                dni=self.obtenerDni()
+                if not ClienteController.buscar(dni):
+                    ClienteController.registrar((self.obtenerDni(), self.obtenerNombres(),
+                                self.obtenerApellidoPaterno(), self.obtenerApellidoMaterno(),
+                                self.obtenerDireccion(), self.obtenerTelefono()))
+                    self.limpiarControles()
+                    self.listar()
+                else:
+                    QtWidgets.QMessageBox.information(self, "Registrar Cliente",
+                                                    "El DNI ingresado ya existe... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
             else:
                 QtWidgets.QMessageBox.information(self, "Registrar Cliente",
-                                                  "El DNI ingresado ya existe... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
-        else:
-            QtWidgets.QMessageBox.information(self, "Registrar Cliente",
-                                                  "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
+                                                    "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
+        
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def consultar(self):
-        #self.limpiarTabla()
-        if len(ClienteController.listar()) == 0:
-                QtWidgets.QMessageBox.information(self, "Consultar Cliente",
-                                                  "No existe clientes a consultar... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
-        else:
-            dni, _ = QtWidgets.QInputDialog.getText(self, "Consultar Cliente",
-                                                  "Ingrese el DNI a consultar")
-            cli = ClienteController.buscar(dni)
-            if not cli:
-                QtWidgets.QMessageBox.information(self, "Consultar Cliente",
-                                                  "El DNI ingresado no existe... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
+        try:
+            #self.limpiarTabla()
+            if len(ClienteController.listar()) == 0:
+                    QtWidgets.QMessageBox.information(self, "Consultar Cliente",
+                                                    "No existe clientes a consultar... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
             else:
-                self.txtDni.setText(cli[0].getDniCliente())
-                self.txtNombres.setText(cli[0].getNombresCliente())
-                self.txtApellidoPaterno.setText(cli[0].getApellidoPaternoCliente())
-                self.txtApellidoMaterno.setText(cli[0].getApellidoMaternoCliente())
-                self.txtDireccion.setText(cli[0].getDireccionCliente())
-                self.txtTelefono.setText(cli[0].getTelefonoCliente())
+                dni, _ = QtWidgets.QInputDialog.getText(self, "Consultar Cliente",
+                                                    "Ingrese el DNI a consultar")
+                cli = ClienteController.buscar(dni)
+                if not cli:
+                    QtWidgets.QMessageBox.information(self, "Consultar Cliente",
+                                                    "El DNI ingresado no existe... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
+                else:
+                    self.txtDni.setText(cli[0].getDniCliente())
+                    self.txtNombres.setText(cli[0].getNombresCliente())
+                    self.txtApellidoPaterno.setText(cli[0].getApellidoPaternoCliente())
+                    self.txtApellidoMaterno.setText(cli[0].getApellidoMaternoCliente())
+                    self.txtDireccion.setText(cli[0].getDireccionCliente())
+                    self.txtTelefono.setText(cli[0].getTelefonoCliente())
 
-                self.tblClientes.setRowCount(1)
-                self.tblClientes.setItem(0,0, QtWidgets.QTableWidgetItem(cli[0].getDniCliente()))
-                self.tblClientes.setItem(0,1, QtWidgets.QTableWidgetItem(cli[0].getNombresCliente()))
-                self.tblClientes.setItem(0,2, QtWidgets.QTableWidgetItem(cli[0].getApellidoPaternoCliente()))
-                self.tblClientes.setItem(0,3, QtWidgets.QTableWidgetItem(cli[0].getApellidoMaternoCliente()))
-                self.tblClientes.setItem(0,4, QtWidgets.QTableWidgetItem(cli[0].getDireccionCliente()))
-                self.tblClientes.setItem(0,5, QtWidgets.QTableWidgetItem(cli[0].getTelefonoCliente()))
+                    self.tblClientes.setRowCount(1)
+                    self.tblClientes.setItem(0,0, QtWidgets.QTableWidgetItem(cli[0].getDniCliente()))
+                    self.tblClientes.setItem(0,1, QtWidgets.QTableWidgetItem(cli[0].getNombresCliente()))
+                    self.tblClientes.setItem(0,2, QtWidgets.QTableWidgetItem(cli[0].getApellidoPaternoCliente()))
+                    self.tblClientes.setItem(0,3, QtWidgets.QTableWidgetItem(cli[0].getApellidoMaternoCliente()))
+                    self.tblClientes.setItem(0,4, QtWidgets.QTableWidgetItem(cli[0].getDireccionCliente()))
+                    self.tblClientes.setItem(0,5, QtWidgets.QTableWidgetItem(cli[0].getTelefonoCliente()))
 
-                self.consultado = True
+                    self.consultado = True
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def eliminar(self):
-        if self.consultado == False:
-            QtWidgets.QMessageBox.information(self, "Consulte Cliente",
-                                              "Por favor consultar el dni",
-                                              QtWidgets.QMessageBox.Ok)
-        else:
-            dni = self.txtDni.text()
-            ClienteController.eliminar(dni)
-            self.limpiarControles()
-            self.listar()
+        try:
+            if self.consultado == False:
+                QtWidgets.QMessageBox.information(self, "Consulte Cliente",
+                                                "Por favor consultar el dni",
+                                                QtWidgets.QMessageBox.Ok)
+            else:
+                dni = self.txtDni.text()
+                ClienteController.eliminar(dni)
+                self.limpiarControles()
+                self.listar()
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def quitar(self):
-        if len(ClienteController.listar()) ==0:
-            QtWidgets.QMessageBox.information(self, "Eliminar Cliente",
-                                              "No existe clientes a eliminar... !!!",
-                                              QtWidgets.QMessageBox.Ok)
-        else:
-            fila=self.tblClientes.selectedItems()
-            if fila:
-                indiceFila=fila[0].row()
-                dni=self.tblClientes.item(indiceFila, 0).text()
-                ClienteController.eliminar(dni)
-                self.limpiarTabla()
-                self.listar()
-            else:
+        try:
+            if len(ClienteController.listar()) ==0:
                 QtWidgets.QMessageBox.information(self, "Eliminar Cliente",
-                                                  "Debe seleccionar una fila... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
+                                                "No existe clientes a eliminar... !!!",
+                                                QtWidgets.QMessageBox.Ok)
+            else:
+                fila=self.tblClientes.selectedItems()
+                if fila:
+                    indiceFila=fila[0].row()
+                    dni=self.tblClientes.item(indiceFila, 0).text()
+                    ClienteController.eliminar(dni)
+                    self.limpiarTabla()
+                    self.listar()
+                else:
+                    QtWidgets.QMessageBox.information(self, "Eliminar Cliente",
+                                                    "Debe seleccionar una fila... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def seleccionarFilaTabla(self):
         fila = self.tblClientes.currentRow()
@@ -223,22 +236,19 @@ class VentanaClientes(QtWidgets.QMainWindow):
 
                 dni= self.obtenerDni()
                 cli= ClienteController.buscar(dni)
-                if not cli:
+                if cli:
                     if self.valida() == "":
-                        objCli= cliente(self.obtenerDni(), self.obtenerNombres(),
+                        ClienteController.modificar((self.obtenerDni(), self.obtenerNombres(),
                                         self.obtenerApellidoPaterno(),
                                         self.obtenerApellidoMaterno(),
-                                        self.obtenerDireccion(),self.obtenerTelefono())
-                        ClienteController.modificar(objCli)
+                                        self.obtenerDireccion(),self.obtenerTelefono()))
                         self.limpiarControles()
                         self.listar()
                     else:
                         QtWidgets.QMessageBox.information(self, "Registrar Producto",
                                                   "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
-            except:
-                QtWidgets.QMessageBox.information(self, "Modificar Producto",
-                                                  "Seleccione un producto a Modificar... !!!",
-						                        QtWidgets.QMessageBox.Ok)
+            except ValueError as e:
+                QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
 
 

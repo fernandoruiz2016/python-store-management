@@ -20,18 +20,26 @@ class ClienteRepository:
             VALUES (%s, %s, %s, %s, %s, %s)
         """
 
-        cursor.execute(sql, (
-            cliente.getDniCliente(),
-            cliente.getNombresCliente(),
-            cliente.getApellidoPaternoCliente(),
-            cliente.getApellidoMaternoCliente(),
-            cliente.getDireccionCliente(),
-            cliente.getTelefonoCliente()
-        ))
+        try:
+            cursor.execute(sql, (
+                cliente.getDniCliente(),
+                cliente.getNombresCliente(),
+                cliente.getApellidoPaternoCliente(),
+                cliente.getApellidoMaternoCliente(),
+                cliente.getDireccionCliente(),
+                cliente.getTelefonoCliente()
+            ))
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+            conn.commit()
+            return True
+        
+        except Exception as e:
+            conn.rollback()
+            raise e
+        
+        finally:
+            cursor.close()
+            conn.close()
     
     @staticmethod
     def listar():
@@ -42,16 +50,23 @@ class ClienteRepository:
             SELECT dni, nombres, apellido_paterno, apellido_materno, direccion, telefono
             FROM clientes
         """
-        cursor.execute(sql)
-        clientes = []
 
-        for fila in cursor.fetchall():
-            clientes.append(cliente(*fila))
+        try:
+            cursor.execute(sql)
+            clientes = []
 
-        cursor.close()
-        conn.close()
+            for fila in cursor.fetchall():
+                clientes.append(cliente(*fila))
+            
+            return clientes
 
-        return clientes
+        except Exception as e:
+            conn.rollback()
+            raise e
+        
+        finally:
+            cursor.close()
+            conn.close()
     
     @staticmethod
     def buscar(dni):
@@ -63,18 +78,24 @@ class ClienteRepository:
             FROM clientes
             WHERE dni = %s
         """
-        cursor.execute(sql, (
-            dni,
-        ))
-        clientes = []
+        
+        try:
+            cursor.execute(sql, (
+                dni,
+            ))
+            clientes = []
 
-        for fila in cursor.fetchall():
-            clientes.append(cliente(*fila))
+            for fila in cursor.fetchall():
+                clientes.append(cliente(*fila))
+            return clientes
 
-        cursor.close()
-        conn.close()
-
-        return clientes
+        except Exception as e:
+            conn.rollback()
+            raise e
+        
+        finally:
+            cursor.close()
+            conn.close()
     
     @staticmethod
     def modificar(cliente):
@@ -92,18 +113,25 @@ class ClienteRepository:
             WHERE dni = %s
         """
 
-        cursor.execute(sql, (
-            cliente.getNombresCliente(),
-            cliente.getApellidoPaternoCliente(),
-            cliente.getApellidoMaternoCliente(),
-            cliente.getDireccionCliente(),
-            cliente.getTelefonoCliente(),
-            cliente.getDniCliente()
-        ))
-
-        conn.commit()
-        cursor.close()
-        conn.close()
+        try:
+            cursor.execute(sql, (
+                cliente.getNombresCliente(),
+                cliente.getApellidoPaternoCliente(),
+                cliente.getApellidoMaternoCliente(),
+                cliente.getDireccionCliente(),
+                cliente.getTelefonoCliente(),
+                cliente.getDniCliente()
+            ))
+            conn.commit()
+            return True
+        
+        except Exception as e:
+            conn.rollback()
+            raise e
+        
+        finally:
+            cursor.close()
+            conn.close()
 
     @staticmethod
     def eliminar(dni):
@@ -114,10 +142,18 @@ class ClienteRepository:
             DELETE FROM clientes WHERE dni = %s
         """
 
-        cursor.execute(sql, (
-            dni,
-        ))
+        try:
+            cursor.execute(sql, (
+                dni,
+            ))
+            conn.commit()
+            
+            return True
 
-        conn.commit()
-        cursor.close()
-        conn.close()
+        except Exception as e:
+            conn.rollback()
+            raise e
+        
+        finally:
+            cursor.close()
+            conn.close()
