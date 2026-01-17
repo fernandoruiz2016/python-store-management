@@ -4,7 +4,8 @@
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 
-from Controlador.ClienteController import ClienteController, cliente
+from Controlador.ClienteController import ClienteController
+from Modelo.clientes import cliente
 
 # QtGui --> utiliza los botones del formulario
 
@@ -99,7 +100,7 @@ class VentanaClientes(QtWidgets.QMainWindow):
         self.tblClientes.setColumnCount(6)
         #Cabecera
         self.tblClientes.verticalHeader().setVisible(False)
-        for i,cli in range (0, len(clientes)):
+        for i,cli in enumerate(clientes):
             self.tblClientes.setItem(i, 0, QtWidgets.QTableWidgetItem(cli.getDniCliente()))
             self.tblClientes.setItem(i, 1, QtWidgets.QTableWidgetItem(cli.getNombresCliente()))
             self.tblClientes.setItem(i, 2, QtWidgets.QTableWidgetItem(cli.getApellidoPaternoCliente()))
@@ -146,26 +147,26 @@ class VentanaClientes(QtWidgets.QMainWindow):
         else:
             dni, _ = QtWidgets.QInputDialog.getText(self, "Consultar Cliente",
                                                   "Ingrese el DNI a consultar")
-            pos = ClienteController.buscar(dni)
-            if not pos:
+            cli = ClienteController.buscar(dni)
+            if not cli:
                 QtWidgets.QMessageBox.information(self, "Consultar Cliente",
                                                   "El DNI ingresado no existe... !!!",
                                                   QtWidgets.QMessageBox.Ok)
             else:
-                self.txtDni.setText(aCli.devolverCliente(pos).getDniCliente())
-                self.txtNombres.setText(aCli.devolverCliente(pos).getNombresCliente())
-                self.txtApellidoPaterno.setText(aCli.devolverCliente(pos).getApellidoPaternoCliente())
-                self.txtApellidoMaterno.setText(aCli.devolverCliente(pos).getApellidoMaternoCliente())
-                self.txtDireccion.setText(aCli.devolverCliente(pos).getDireccionCliente())
-                self.txtTelefono.setText(aCli.devolverCliente(pos).getTelefonoCliente())
+                self.txtDni.setText(cli[0].getDniCliente())
+                self.txtNombres.setText(cli[0].getNombresCliente())
+                self.txtApellidoPaterno.setText(cli[0].getApellidoPaternoCliente())
+                self.txtApellidoMaterno.setText(cli[0].getApellidoMaternoCliente())
+                self.txtDireccion.setText(cli[0].getDireccionCliente())
+                self.txtTelefono.setText(cli[0].getTelefonoCliente())
 
                 self.tblClientes.setRowCount(1)
-                self.tblClientes.setItem(0,0, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getDniCliente()))
-                self.tblClientes.setItem(0,1, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getNombresCliente()))
-                self.tblClientes.setItem(0,2, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getApellidoPaternoCliente()))
-                self.tblClientes.setItem(0,3, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getApellidoMaternoCliente()))
-                self.tblClientes.setItem(0,4, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getDireccionCliente()))
-                self.tblClientes.setItem(0,5, QtWidgets.QTableWidgetItem(aCli.devolverCliente(pos).getTelefonoCliente()))
+                self.tblClientes.setItem(0,0, QtWidgets.QTableWidgetItem(cli[0].getDniCliente()))
+                self.tblClientes.setItem(0,1, QtWidgets.QTableWidgetItem(cli[0].getNombresCliente()))
+                self.tblClientes.setItem(0,2, QtWidgets.QTableWidgetItem(cli[0].getApellidoPaternoCliente()))
+                self.tblClientes.setItem(0,3, QtWidgets.QTableWidgetItem(cli[0].getApellidoMaternoCliente()))
+                self.tblClientes.setItem(0,4, QtWidgets.QTableWidgetItem(cli[0].getDireccionCliente()))
+                self.tblClientes.setItem(0,5, QtWidgets.QTableWidgetItem(cli[0].getTelefonoCliente()))
 
                 self.consultado = True
 
@@ -176,14 +177,12 @@ class VentanaClientes(QtWidgets.QMainWindow):
                                               QtWidgets.QMessageBox.Ok)
         else:
             dni = self.txtDni.text()
-            pos = aCli.buscarCliente(dni)
-            aCli.eliminarCliente(pos)
-            aCli.grabar()
+            ClienteController.eliminar(dni)
             self.limpiarControles()
             self.listar()
 
     def quitar(self):
-        if aCli.tamañoArregloCliente() ==0:
+        if len(ClienteController.listar()) ==0:
             QtWidgets.QMessageBox.information(self, "Eliminar Cliente",
                                               "No existe clientes a eliminar... !!!",
                                               QtWidgets.QMessageBox.Ok)
@@ -192,9 +191,7 @@ class VentanaClientes(QtWidgets.QMainWindow):
             if fila:
                 indiceFila=fila[0].row()
                 dni=self.tblClientes.item(indiceFila, 0).text()
-                pos =aCli.buscarCliente(dni)
-                aCli.eliminarCliente(pos)
-                aCli.grabar()
+                ClienteController.eliminar(dni)
                 self.limpiarTabla()
                 self.listar()
             else:
@@ -213,7 +210,7 @@ class VentanaClientes(QtWidgets.QMainWindow):
         self.txtTelefono.setText(self.tblClientes.item(fila,5).text())
 
     def modificar(self):
-        if aCli.tamañoArregloCliente() == 0:
+        if len(ClienteController.listar()) == 0:
             QtWidgets.QMessageBox.information(self, "Modificar Cliente",
                                                   "No existen clientes a Modificar... !!!",
 						   QtWidgets.QMessageBox.Ok)
@@ -225,15 +222,14 @@ class VentanaClientes(QtWidgets.QMainWindow):
                 self.txtDni.setText(self.tblClientes.item(indiceFila, 0).text())
 
                 dni= self.obtenerDni()
-                pos= aCli.buscarCliente(dni)
-                if pos != -1:
+                cli= ClienteController.buscar(dni)
+                if not cli:
                     if self.valida() == "":
                         objCli= cliente(self.obtenerDni(), self.obtenerNombres(),
                                         self.obtenerApellidoPaterno(),
                                         self.obtenerApellidoMaterno(),
                                         self.obtenerDireccion(),self.obtenerTelefono())
-                        aCli.modificarCliente(objCli, pos)
-                        aCli.grabar()
+                        ClienteController.modificar(objCli)
                         self.limpiarControles()
                         self.listar()
                     else:
