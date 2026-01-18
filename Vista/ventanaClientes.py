@@ -5,7 +5,6 @@ from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 
 from Controlador.ClienteController import ClienteController
-from Modelo.clientes import cliente
 
 # QtGui --> utiliza los botones del formulario
 
@@ -25,23 +24,7 @@ class VentanaClientes(QtWidgets.QMainWindow):
         self.btnQuitar.clicked.connect(self.quitar)
         self.btnModificar.clicked.connect(self.modificar)
         self.btnListar.clicked.connect(self.listar)
-        # self.Carga_Clientes()
         self.listar()
-
-    # Es necesario tener algunos metodos a partir de aqui
-    # def Carga_Clientes(self):
-    #     if aCli.tamañoArregloCliente()==0:
-    #         objCli= cliente('08693923','Alberto','Cordero','Zamorano','Jr. Quezada 221','4585985')
-    #         aCli.adicionaCliente(objCli)
-    #         objCli= cliente('08693923','Juan','Perez','Sanchez','Jr. Cuzco 123','3722754')
-    #         aCli.adicionaCliente(objCli)
-    #         objCli= cliente('08693923','Cesar','Cespedes','Ramos','Av. Peru 162','2752854')
-    #         aCli.adicionaCliente(objCli)
-    #         objCli= cliente('08693923','Roberto','Chambi','Rojas','Jr. Cuzco 222','5714764')
-    #         aCli.adicionaCliente(objCli)
-    #         self.listar()
-    #     else:
-    #         self.listar()
 
     def obtenerDni(self):
         return self.txtDni.text()
