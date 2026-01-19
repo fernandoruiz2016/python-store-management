@@ -398,7 +398,7 @@ font: inter</string>
 font: inter</string>
     </property>
     <property name="text">
-     <string>Total:</string>
+     <string>Total (S/.):</string>
     </property>
    </widget>
    <widget class="QDateEdit" name="dtFecha">

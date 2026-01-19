@@ -255,7 +255,7 @@ border-radius: 5px</string>
      <rect>
       <x>20</x>
       <y>500</y>
-      <width>111</width>
+      <width>161</width>
       <height>21</height>
      </rect>
     </property>
@@ -269,7 +269,7 @@ border-radius: 5px</string>
 font: inter</string>
     </property>
     <property name="text">
-     <string>Precio Costo:</string>
+     <string>Precio Costo (S/.):</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtPrecioVenta">
@@ -300,7 +300,7 @@ border-radius: 5px</string>
      <rect>
       <x>20</x>
       <y>570</y>
-      <width>121</width>
+      <width>161</width>
       <height>21</height>
      </rect>
     </property>
@@ -314,7 +314,7 @@ border-radius: 5px</string>
 font: inter</string>
     </property>
     <property name="text">
-     <string>Precio Venta:</string>
+     <string>Precio Venta (S/.):</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_12">

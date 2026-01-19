@@ -2,12 +2,15 @@
 
 Este proyecto es un sistema de gestión de una tienda desarrollado en **Python**, que permite administrar de forma sencilla los principales elementos del negocio mediante una interfaz con ventanas.
 
-El sistema está organizado en distintas secciones accesibles desde una ventana principal, facilitando la navegación y el uso.
+El sistema está organizado en secciones accesibles desde una ventana principal, facilitando la navegación y el uso.
 
 ---
 ## Funcionalidades
 
 El sistema cuenta con las siguientes opciones:
+
+### Login (Inicio de Sesión)
+- Login de acceso al programa (las credenciales son usuario: admin y contraseña: 123456).
 
 ### Ventana Principal
 - Punto de acceso central a todas las funcionalidades del sistema.
@@ -29,9 +32,8 @@ El sistema cuenta con las siguientes opciones:
 - Edición y eliminación de productos.
 
 ### Gestión de Comprobantes
-- Generación de comprobantes de venta.
-- Asociación de clientes y productos.
-- Registro de transacciones realizadas.
+- Registro de comprobantes.
+- Modificación y eliminación de comprobantes.
 
 ---
 ## Tecnologías Utilizadas
@@ -39,7 +41,7 @@ El sistema cuenta con las siguientes opciones:
 - Lenguaje: Python
 - Arquitectura: MVC
 - Base de datos: PostgreSQL
-- Interfaz gráfica: PyQt
+- Interfaz gráfica: PyQt, QT Designer
 
 ---
 
@@ -59,3 +61,17 @@ El sistema cuenta con las siguientes opciones:
    ```bash
    python main.py
    ```
+
+
+## Configuración de la Base de Datos
+
+Antes de ejecutar la aplicación, asegúrate de configurar las variables de entorno para la conexión a la base de datos.
+
+   ```bash
+   DB_HOST
+   DB_DATABASE
+   DB_USER
+   DB_PASSWORD
+   DB_PORT
+   ```
+
