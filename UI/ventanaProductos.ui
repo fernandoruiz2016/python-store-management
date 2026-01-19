@@ -14,7 +14,9 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: white;</string>
+   <string notr="true">QWidget {
+background: white;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="txtCodigo">
@@ -245,7 +247,7 @@ border: 1px solid #786DA0;
 border-radius: 5px</string>
     </property>
     <property name="text">
-     <string>S/. </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_10">
@@ -290,7 +292,7 @@ border: 1px solid #786DA0;
 border-radius: 5px</string>
     </property>
     <property name="text">
-     <string>S/. </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">
@@ -511,12 +513,12 @@ QTableWidget::item:hover {
     </column>
     <column>
      <property name="text">
-      <string>Precio Costo</string>
+      <string>Precio Costo (S/.)</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Precio Venta</string>
+      <string>Precio Venta  (S/.)</string>
      </property>
     </column>
     <column>

@@ -14,7 +14,9 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: white;</string>
+   <string notr="true">QWidget {
+background: white;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLineEdit" name="txtUsuario">

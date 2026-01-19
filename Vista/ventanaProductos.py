@@ -5,9 +5,7 @@ from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 import re
 
-from Controlador.arregloProductos import ArregloProductos, producto
-# Creamos el objteo aPro el cual podrá usar todos los métodos de arregloProductos
-aPro = ArregloProductos()
+from Controlador.ProductoController import ProductoController
 
 # QtGui --> usiliza los botones del formulario
 
@@ -27,23 +25,7 @@ class VentanaProductos(QtWidgets.QMainWindow):
         self.btnQuitar.clicked.connect(self.quitar)
         self.btnModificar.clicked.connect(self.modificar)
         self.btnListar.clicked.connect(self.listar)
-        # self.Carga_Productos()
         self.listar()
-
-    # Es necesario tener algunos metodos a partir de aqui
-    def Carga_Productos(self):
-        if aPro.tamañoArregloProducto()==0:
-            objPro= producto('P0001','Leche','Evaporada', 50, 100, 1.0, 2.5, 'Gloria', 'Lacteos')
-            aPro.adicionaProducto(objPro)
-            objPro= producto('P0002','Fideos','Fetuccini', 30, 40, 1.1, 3.2, 'Nicolini', 'Trigos')
-            aPro.adicionaProducto(objPro)
-            objPro= producto('P0003','Manzana','Israel', 40, 70, 0.4, 1.5, 'Alicorp', 'Frutas')
-            aPro.adicionaProducto(objPro)
-            objPro= producto('P0004','Aloe','Bebida', 10, 50, 0.7, 2.5, 'AJE', 'Verduras')
-            aPro.adicionaProducto(objPro)
-            self.listar()
-        else:
-            self.listar()
 
     def obtenerCodigo(self):
         return self.txtCodigo.text()
@@ -111,21 +93,26 @@ class VentanaProductos(QtWidgets.QMainWindow):
             return ""
 
     def listar(self):
-        self.tblProductos.setRowCount(aPro.tamañoArregloProducto())
-        self.tblProductos.setColumnCount(9)
-        #Cabecera
-        self.tblProductos.verticalHeader().setVisible(False)
-        for i in range (0, aPro.tamañoArregloProducto()):
-            self.tblProductos.setItem(i, 0, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getCodigoProducto()))
-            self.tblProductos.setItem(i, 1, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getNombreProducto()))
-            self.tblProductos.setItem(i, 2, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getDescripcionProducto()))
-            self.tblProductos.setItem(i, 3, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getStockMinimo()))
-            self.tblProductos.setItem(i, 4, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getStockActual()))
-            self.tblProductos.setItem(i, 5, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getPrecioCosto()))
-            self.tblProductos.setItem(i, 6, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getPrecioVenta()))
-            self.tblProductos.setItem(i, 7, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getProveedor()))
-            self.tblProductos.setItem(i, 8, QtWidgets.QTableWidgetItem(aPro.devolverProducto(i).getAlmacen()))
-        self.consultado = False
+        try:
+            productos = ProductoController.listar()
+            
+            self.tblProductos.setRowCount(len(productos))
+            self.tblProductos.setColumnCount(9)
+            #Cabecera
+            self.tblProductos.verticalHeader().setVisible(False)
+            for i,pro in enumerate(productos):
+                self.tblProductos.setItem(i, 0, QtWidgets.QTableWidgetItem(pro.getCodigoProducto()))
+                self.tblProductos.setItem(i, 1, QtWidgets.QTableWidgetItem(pro.getNombreProducto()))
+                self.tblProductos.setItem(i, 2, QtWidgets.QTableWidgetItem(pro.getDescripcionProducto()))
+                self.tblProductos.setItem(i, 3, QtWidgets.QTableWidgetItem(str(pro.getStockMinimo())))
+                self.tblProductos.setItem(i, 4, QtWidgets.QTableWidgetItem(str(pro.getStockActual())))
+                self.tblProductos.setItem(i, 5, QtWidgets.QTableWidgetItem(str(pro.getPrecioCosto())))
+                self.tblProductos.setItem(i, 6, QtWidgets.QTableWidgetItem(str(pro.getPrecioVenta())))
+                self.tblProductos.setItem(i, 7, QtWidgets.QTableWidgetItem(pro.getProveedor()))
+                self.tblProductos.setItem(i, 8, QtWidgets.QTableWidgetItem(pro.getAlmacen()))
+            self.consultado = False
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def limpiarControles(self):
         self.txtCodigo.clear()
@@ -133,106 +120,109 @@ class VentanaProductos(QtWidgets.QMainWindow):
         self.txtDescripcion.clear()
         self.txtStockMinimo.clear()
         self.txtStockActual.clear()
-        self.txtPrecioCosto.setText("S/. ")
-        self.txtPrecioVenta.setText("S/. ")
+        self.txtPrecioCosto.setText("")
+        self.txtPrecioVenta.setText("")
         self.cboProveedor.setCurrentIndex(0)
         self.cboAlmacen.setCurrentIndex(0)
 
     # Mantenimientos (Grabar (Registrar), Consultar, Modificar, Listar, Quitar)
     def registrar(self):
-        if self.valida() == "":
-            objPro= producto(self.obtenerCodigo(), self.obtenerNombre(),
-                            self.obtenerDescripcion(),
-                            self.obtenerStockMinimo(),
-                            self.obtenerStockActual(),
-                            self.obtenerPrecioCosto(),
-                            self.obtenerPrecioVenta(),
-                            self.obtenerProveedor(),
-                            self.obtenerAlmacen())
-            codigo=self.obtenerCodigo()
-            if aPro.buscarProducto(codigo) == -1:
-                aPro.adicionaProducto(objPro)
-                aPro.grabar()
-                self.limpiarControles()
-                self.listar()
+        try:
+            if self.valida() == "":
+                codigo=self.obtenerCodigo()
+                if not ProductoController.buscar(codigo):
+                    ProductoController.registrar((self.obtenerCodigo(), self.obtenerNombre(),
+                                self.obtenerDescripcion(), self.obtenerStockMinimo(),
+                                self.obtenerStockActual(), self.obtenerPrecioCosto(),
+                                self.obtenerPrecioVenta(), self.obtenerProveedor(), self.obtenerAlmacen()))
+                    self.limpiarControles()
+                    self.listar()
+                else:
+                    QtWidgets.QMessageBox.information(self, "Registrar Producto",
+                                                    "El Código ingresado ya existe... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
             else:
                 QtWidgets.QMessageBox.information(self, "Registrar Producto",
-                                                  "El Codigo ingresado ya existe... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
-        else:
-            QtWidgets.QMessageBox.information(self, "Registrar Producto",
-                                                  "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
+                                                    "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
+        
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def consultar(self):
-        #self.limpiarTabla()
-        if aPro.tamañoArregloProducto() == 0:
-                QtWidgets.QMessageBox.information(self, "Consultar Producto",
-                                                  "No existe productos a consultar... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
-        else:
-            codigo, _ = QtWidgets.QInputDialog.getText(self, "Consultar Producto",
-                                                  "Ingrese el Código a consultar")
-            pos = aPro.buscarProducto(codigo)
-            if pos == -1:
-                QtWidgets.QMessageBox.information(self, "Consultar Producto",
-                                                  "El Codigo ingresado no existe... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
+        try:
+            #self.limpiarTabla()
+            if len(ProductoController.listar()) == 0:
+                    QtWidgets.QMessageBox.information(self, "Consultar Producto",
+                                                    "No existe productos a consultar... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
             else:
-                self.txtCodigo.setText(aPro.devolverProducto(pos).getCodigoProducto())
-                self.txtNombre.setText(aPro.devolverProducto(pos).getNombreProducto())
-                self.txtDescripcion.setText(aPro.devolverProducto(pos).getDescripcionProducto())
-                self.txtStockMinimo.setText(aPro.devolverProducto(pos).getStockMinimo())
-                self.txtStockActual.setText(aPro.devolverProducto(pos).getStockActual())
-                self.txtPrecioCosto.setText(aPro.devolverProducto(pos).getPrecioCosto())
-                self.txtPrecioVenta.setText(aPro.devolverProducto(pos).getPrecioVenta())
-                self.cboProveedor.setCurrentText(aPro.devolverProducto(pos).getProveedor())
-                self.cboAlmacen.setCurrentText(aPro.devolverProducto(pos).getAlmacen())
+                codigo, _ = QtWidgets.QInputDialog.getText(self, "Consultar Producto",
+                                                    "Ingrese el Código a consultar")
+                pro = ProductoController.buscar(codigo)
+                if not pro:
+                    QtWidgets.QMessageBox.information(self, "Consultar Producto",
+                                                    "El Código ingresado no existe... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
+                else:
+                    self.txtCodigo.setText(pro[0].getCodigoProducto())
+                    self.txtNombre.setText(pro[0].getNombreProducto())
+                    self.txtDescripcion.setText(pro[0].getDescripcionProducto())
+                    self.txtStockMinimo.setText(pro[0].getStockMinimo())
+                    self.txtStockActual.setText(pro[0].getStockActual())
+                    self.txtPrecioCosto.setText(pro[0].getPrecioCosto())
+                    self.txtPrecioVenta.setText(pro[0].getPrecioVenta())
+                    self.cboProveedor.setCurrentText(pro[0].getProveedor())
+                    self.cboAlmacen.setCurrentText(pro[0].getAlmacen())
 
-                self.tblProductos.setRowCount(1)
-                self.tblProductos.setItem(0,0, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getCodigoProducto()))
-                self.tblProductos.setItem(0,1, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getNombreProducto()))
-                self.tblProductos.setItem(0,2, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getDescripcionProducto()))
-                self.tblProductos.setItem(0,3, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getStockMinimo()))
-                self.tblProductos.setItem(0,4, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getStockActual()))
-                self.tblProductos.setItem(0,5, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getPrecioCosto()))
-                self.tblProductos.setItem(0,6, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getPrecioVenta()))
-                self.tblProductos.setItem(0,7, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getProveedor()))
-                self.tblProductos.setItem(0,8, QtWidgets.QTableWidgetItem(aPro.devolverProducto(pos).getAlmacen()))
-                
-                self.consultado = True
+                    self.tblProductos.setRowCount(1)
+                    self.tblProductos.setItem(0,0, QtWidgets.QTableWidgetItem(pro[0].getCodigoProducto()))
+                    self.tblProductos.setItem(0,1, QtWidgets.QTableWidgetItem(pro[0].getNombreProducto()))
+                    self.tblProductos.setItem(0,2, QtWidgets.QTableWidgetItem(pro[0].getDescripcionProducto()))
+                    self.tblProductos.setItem(0,3, QtWidgets.QTableWidgetItem(pro[0].getStockMinimo()))
+                    self.tblProductos.setItem(0,4, QtWidgets.QTableWidgetItem(pro[0].getStockActual()))
+                    self.tblProductos.setItem(0,5, QtWidgets.QTableWidgetItem(pro[0].getPrecioCosto()))
+                    self.tblProductos.setItem(0,6, QtWidgets.QTableWidgetItem(pro[0].getPrecioVenta()))
+                    self.tblProductos.setItem(0,7, QtWidgets.QTableWidgetItem(pro[0].getProveedor()))
+                    self.tblProductos.setItem(0,8, QtWidgets.QTableWidgetItem(pro[0].getAlmacen()))
+
+                    self.consultado = True
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def eliminar(self):
-        if self.consultado == False:
-            QtWidgets.QMessageBox.information(self, "Consulte Producto",
-                                              "Por favor consultar el codigo",
-                                              QtWidgets.QMessageBox.Ok)
-        else:
-            codigo = self.txtCodigo.text()
-            pos = aPro.buscarProducto(codigo)
-            aPro.eliminarProducto(pos)
-            aPro.grabar()
-            self.limpiarControles()
-            self.listar()
+        try:
+            if self.consultado == False:
+                QtWidgets.QMessageBox.information(self, "Consulte Producto",
+                                                "Por favor consultar el codigo",
+                                                QtWidgets.QMessageBox.Ok)
+            else:
+                codigo = self.txtCodigo.text()
+                ProductoController.eliminar(codigo)
+                self.limpiarControles()
+                self.listar()
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def quitar(self):
-        if aPro.tamañoArregloProducto() ==0:
-            QtWidgets.QMessageBox.information(self, "Eliminar Producto",
-                                              "No existe productos a eliminar... !!!",
-                                              QtWidgets.QMessageBox.Ok)
-        else:
-            fila=self.tblProductos.selectedItems()
-            if fila:
-                indiceFila=fila[0].row()
-                codigo=self.tblProductos.item(indiceFila, 0).text()
-                pos =aPro.buscarProducto(codigo)
-                aPro.eliminarProducto(pos)
-                aPro.grabar()
-                self.limpiarTabla()
-                self.listar()
-            else:
+        try:
+            if len(ProductoController.listar()) ==0:
                 QtWidgets.QMessageBox.information(self, "Eliminar Producto",
-                                                  "Debe seleccionar una fila... !!!",
-                                                  QtWidgets.QMessageBox.Ok)
+                                                "No existe productos a eliminar... !!!",
+                                                QtWidgets.QMessageBox.Ok)
+            else:
+                fila=self.tblProductos.selectedItems()
+                if fila:
+                    indiceFila=fila[0].row()
+                    codigo=self.tblProductos.item(indiceFila, 0).text()
+                    ProductoController.eliminar(codigo)
+                    self.limpiarTabla()
+                    self.listar()
+                else:
+                    QtWidgets.QMessageBox.information(self, "Eliminar Producto",
+                                                    "Debe seleccionar una fila... !!!",
+                                                    QtWidgets.QMessageBox.Ok)
+        except ValueError as e:
+            QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
     def seleccionarFilaTabla(self):
         fila = self.tblProductos.currentRow()
@@ -248,10 +238,10 @@ class VentanaProductos(QtWidgets.QMainWindow):
         self.cboAlmacen.setCurrentText(self.tblProductos.item(fila,8).text())
 
     def modificar(self):
-        if aPro.tamañoArregloProducto() == 0:
+        if len(ProductoController.listar()) == 0:
             QtWidgets.QMessageBox.information(self, "Modificar Producto",
                                                   "No existen productos a Modificar... !!!",
-						                    QtWidgets.QMessageBox.Ok)
+						   QtWidgets.QMessageBox.Ok)
         else:
             try:
                 fila=self.tblProductos.selectedItems()
@@ -260,27 +250,18 @@ class VentanaProductos(QtWidgets.QMainWindow):
                 self.txtCodigo.setText(self.tblProductos.item(indiceFila, 0).text())
 
                 codigo= self.obtenerCodigo()
-                pos= aPro.buscarProducto(codigo)
-                if pos != -1:
+                pro= ProductoController.buscar(codigo)
+                if pro:
                     if self.valida() == "":
-                        objPro= producto(self.obtenerCodigo(), self.obtenerNombre(),
-                                    self.obtenerDescripcion(),
-                                    self.obtenerStockMinimo(),
-                                    self.obtenerStockActual(),
-                                    self.obtenerPrecioCosto(),
-                                    self.obtenerPrecioVenta(),
-                                    self.obtenerProveedor(),
-                                    self.obtenerAlmacen())
-                        aPro.modificarProducto(objPro, pos)
-                        aPro.grabar()
+                        ProductoController.modificar((self.obtenerCodigo(), self.obtenerNombre(),
+                                self.obtenerDescripcion(), self.obtenerStockMinimo(),
+                                self.obtenerStockActual(), self.obtenerPrecioCosto(),
+                                self.obtenerPrecioVenta(), self.obtenerProveedor(), self.obtenerAlmacen()))
                         self.limpiarControles()
                         self.listar()
                     else:
                         QtWidgets.QMessageBox.information(self, "Registrar Producto",
                                                   "Error en " + self.valida(), QtWidgets.QMessageBox.Ok)
-            except:
-                QtWidgets.QMessageBox.information(self, "Modificar Producto",
-                                                  "Seleccione un producto a Modificar... !!!",
-						                        QtWidgets.QMessageBox.Ok)
-
+            except ValueError as e:
+                QtWidgets.QMessageBox.warning(self, "Error", str(e))
 
