@@ -224,7 +224,7 @@ border: 1px solid #786DA0;
 border-radius: 5px</string>
     </property>
     <property name="text">
-     <string>S/. </string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtId">
@@ -297,7 +297,7 @@ QTableWidget QScrollBar:horizontal {
     </column>
     <column>
      <property name="text">
-      <string>Total</string>
+      <string>Total (S/.)</string>
      </property>
     </column>
    </widget>
