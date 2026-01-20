@@ -16,33 +16,38 @@ El sistema cuenta con las siguientes opciones:
 ### Ventana Principal
 - Punto de acceso central a todas las funcionalidades del sistema.
 - Permite navegar entre clientes, empleados, productos y comprobantes.
-
+<p align="center">
 <img src="images/principal.png" height="400">
+</p>
 
 ### Gestión de Clientes
 - Registro de clientes.
 - Actualización y eliminación de clientes.
-
+<p align="center">
 <img src="images/clientes.png" height="400">
+</p>
 
 ### Gestión de Empleados
 - Registro de empleados.
 - Actualización y eliminación de empleados.
-
+<p align="center">
 <img src="images/empleados.png" height="400">
+</p>
 
 ### Gestión de Productos
 - Registro de productos.
 - Control de precios y stock.
 - Modificación y eliminación de productos.
-
+<p align="center">
 <img src="images/productos.png" height="400">
+</p>
 
 ### Gestión de Comprobantes
 - Registro de comprobantes.
 - Modificación y eliminación de comprobantes.
-
+<p align="center">
 <img src="images/comprobantes.png" height="400">
+</p>
 
 ---
 ## Tecnologías Utilizadas
