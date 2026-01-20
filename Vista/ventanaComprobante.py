@@ -139,11 +139,11 @@ class VentanaComprobante(QtWidgets.QMainWindow):
                     self.dtFecha.setText(com[0].getFecha())
                     self.txtTotal.setText(com[0].getTotal())
 
-                    self.tblClientes.setRowCount(1)
-                    self.tblClientes.setItem(0,0, QtWidgets.QTableWidgetItem(com[0].getIdComprobante()))
-                    self.tblClientes.setItem(0,1, QtWidgets.QTableWidgetItem(com[0].getTipo()))
-                    self.tblClientes.setItem(0,2, QtWidgets.QTableWidgetItem(str(com[0].getFecha())))
-                    self.tblClientes.setItem(0,3, QtWidgets.QTableWidgetItem(str(com[0].getTotal())))
+                    self.tblComprobantes.setRowCount(1)
+                    self.tblComprobantes.setItem(0,0, QtWidgets.QTableWidgetItem(com[0].getIdComprobante()))
+                    self.tblComprobantes.setItem(0,1, QtWidgets.QTableWidgetItem(com[0].getTipo()))
+                    self.tblComprobantes.setItem(0,2, QtWidgets.QTableWidgetItem(str(com[0].getFecha())))
+                    self.tblComprobantes.setItem(0,3, QtWidgets.QTableWidgetItem(str(com[0].getTotal())))
 
                     self.consultado = True
         except ValueError as e:
@@ -170,7 +170,7 @@ class VentanaComprobante(QtWidgets.QMainWindow):
                                                 "No existen comprobantes a eliminar... !!!",
                                                 QtWidgets.QMessageBox.Ok)
             else:
-                fila=self.tblClientes.selectedItems()
+                fila=self.tblComprobantes.selectedItems()
                 if fila:
                     indiceFila=fila[0].row()
                     id=self.tblComprobantes.item(indiceFila, 0).text()
