@@ -17,19 +17,17 @@ El sistema cuenta con las siguientes opciones:
 - Permite navegar entre clientes, empleados, productos y comprobantes.
 
 ### Gestión de Clientes
-- Registrar nuevos clientes.
-- Consultar información de clientes existentes.
-- Actualizar y eliminar clientes.
+- Registro de clientes.
+- Actualización y eliminación de clientes.
 
 ### Gestión de Empleados
 - Registro de empleados.
-- Visualización de datos del personal.
-- Modificación y eliminación de empleados.
+- Actualización y eliminación de empleados.
 
 ### Gestión de Productos
 - Registro de productos.
 - Control de precios y stock.
-- Edición y eliminación de productos.
+- Modificación y eliminación de productos.
 
 ### Gestión de Comprobantes
 - Registro de comprobantes.
@@ -57,15 +55,29 @@ El sistema cuenta con las siguientes opciones:
    cd python-store-management
    ```
 
-3. Ejecuta la aplicación
+3. Crea y activa un entorno virtual:
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+4. Instala las dependencias:
+   ```bash  
+   pip install -r requirements.txt
+   ```
+
+5. Ejecuta la aplicación
    ```bash
    python main.py
    ```
 
+---
 
 ## Configuración de la Base de Datos
 
-Antes de ejecutar la aplicación, asegúrate de configurar las variables de entorno para la conexión a la base de datos.
+Antes de ejecutar la aplicación, debes crear una base de datos en PostgreSQL.
+
+Asegúrate de configurar las variables de entorno para la conexión a la base de datos.
 
    ```bash
    DB_HOST
@@ -75,3 +87,8 @@ Antes de ejecutar la aplicación, asegúrate de configurar las variables de ento
    DB_PORT
    ```
 
+## 👤 Autor
+
+Fernando Ruiz
+
+Este es un proyecto académico, el cual he ampliado y mejorado con fines educativos.
