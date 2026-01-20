@@ -11,7 +11,9 @@ El sistema cuenta con las siguientes opciones:
 
 ### Login (Inicio de Sesión)
 - Login de acceso al programa (las credenciales son usuario: admin y contraseña: 123456).
+<p align="center">
 <img src="images/login.png" height="400">
+</p>
 
 ### Ventana Principal
 - Punto de acceso central a todas las funcionalidades del sistema.
