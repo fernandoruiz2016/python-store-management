@@ -1,10 +1,10 @@
 from config.database import get_connection
-from Modelo.comprobantes import comprobante
+from Modelo.comprobante import Comprobante
 
 class ComprobanteRepository:
 
     @staticmethod
-    def registrar(comprobante):
+    def registrar(Comprobante):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -20,10 +20,10 @@ class ComprobanteRepository:
 
         try:
             cursor.execute(sql, (
-                comprobante.getIdComprobante(),
-                comprobante.getTipo(),
-                comprobante.getFecha(),
-                comprobante.getTotal()
+                Comprobante.getIdComprobante(),
+                Comprobante.getTipo(),
+                Comprobante.getFecha(),
+                Comprobante.getTotal()
             ))
 
             conn.commit()
@@ -52,7 +52,7 @@ class ComprobanteRepository:
             comprobantes = []
 
             for fila in cursor.fetchall():
-                comprobantes.append(comprobante(*fila))
+                comprobantes.append(Comprobante(*fila))
             
             return comprobantes
 
@@ -82,7 +82,7 @@ class ComprobanteRepository:
             comprobantes = []
 
             for fila in cursor.fetchall():
-                comprobantes.append(comprobante(*fila))
+                comprobantes.append(Comprobante(*fila))
             return comprobantes
 
         except Exception as e:
@@ -94,7 +94,7 @@ class ComprobanteRepository:
             conn.close()
     
     @staticmethod
-    def modificar(comprobante):
+    def modificar(Comprobante):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -109,10 +109,10 @@ class ComprobanteRepository:
 
         try:
             cursor.execute(sql, (
-                comprobante.getTipo(),
-                comprobante.getFecha(),
-                comprobante.getTotal(),
-                comprobante.getIdComprobante(),
+                Comprobante.getTipo(),
+                Comprobante.getFecha(),
+                Comprobante.getTotal(),
+                Comprobante.getIdComprobante(),
             ))
             conn.commit()
             return True

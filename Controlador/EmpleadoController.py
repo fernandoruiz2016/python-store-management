@@ -1,5 +1,5 @@
-from Repository.EmpleadoRepository import EmpleadoRepository
-from Modelo.empleados import empleado
+from Repository.empleadoRepository import EmpleadoRepository
+from Modelo.empleado import Empleado
 
 class EmpleadoController():
 
@@ -12,7 +12,7 @@ class EmpleadoController():
         if not dni:
             raise ValueError("DNI obligatorio")
         
-        emp = empleado(
+        emp = Empleado(
             dni,
             nombres,
             ap_pat,
@@ -44,7 +44,7 @@ class EmpleadoController():
         if not dni:
             raise ValueError("DNI obligatorio")
         
-        emp = empleado(
+        emp = Empleado(
             dni,
             nombres,
             ap_pat,

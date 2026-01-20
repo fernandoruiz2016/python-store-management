@@ -1,18 +1,18 @@
-from Repository.ComprobanteRepository import ComprobanteRepository
-from Modelo.comprobantes import comprobante
+from Repository.comprobanteRepository import ComprobanteRepository
+from Modelo.comprobante import Comprobante
 
 class ComprobanteController():
 
     @staticmethod
     def registrar(datos):
         if not datos:
-            raise ValueError("Faltan los datos del comprobante")
+            raise ValueError("Faltan los datos del Comprobante")
         
         id, tipo, fecha, total = datos
         if not id:
             raise ValueError("Id obligatorio")
         
-        com = comprobante(
+        com = Comprobante(
             id,
             tipo, 
             fecha,
@@ -36,13 +36,13 @@ class ComprobanteController():
     @staticmethod
     def modificar(datos):
         if not datos:
-            raise ValueError("Faltan los datos del comprobante")
+            raise ValueError("Faltan los datos del Comprobante")
         
         id, tipo, fecha, total = datos
         if not id:
             raise ValueError("Id obligatorio")
         
-        com = comprobante(
+        com = Comprobante(
             id,
             tipo, 
             fecha,
@@ -53,9 +53,9 @@ class ComprobanteController():
     @staticmethod
     def eliminar(id):
         if not id:
-            raise ValueError("Debe seleccionar un comprobante")
+            raise ValueError("Debe seleccionar un Comprobante")
 
         if not ComprobanteRepository.buscar(id):
-            raise ValueError("El comprobante no existe")
+            raise ValueError("El Comprobante no existe")
 
         return ComprobanteRepository.eliminar(id)

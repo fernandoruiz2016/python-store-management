@@ -1,4 +1,4 @@
-class comprobante():
+class Comprobante():
 
     #Atributos Encapsulados (Privados)
     __idComprobante =""; __tipo= ""

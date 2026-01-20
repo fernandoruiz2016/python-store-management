@@ -1,5 +1,5 @@
-from Repository.ClienteRepository import ClienteRepository
-from Modelo.clientes import cliente
+from Repository.clienteRepository import ClienteRepository
+from Modelo.cliente import Cliente
 
 class ClienteController():
 
@@ -12,7 +12,7 @@ class ClienteController():
         if not dni:
             raise ValueError("DNI obligatorio")
         
-        cli = cliente(
+        cli = Cliente(
             dni,
             nombres,
             ap_pat,
@@ -44,7 +44,7 @@ class ClienteController():
         if not dni:
             raise ValueError("DNI obligatorio")
         
-        cli = cliente(
+        cli = Cliente(
             dni,
             nombres,
             ap_pat,

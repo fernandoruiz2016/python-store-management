@@ -1,4 +1,4 @@
-class empleado():
+class Empleado():
 
     #Atributos Encapsulados (Privados)
     __dniEmpleado =""; __nombresEmpleado= ""

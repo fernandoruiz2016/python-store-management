@@ -1,10 +1,10 @@
 from config.database import get_connection
-from Modelo.clientes import cliente
+from Modelo.cliente import Cliente
 
 class ClienteRepository:
 
     @staticmethod
-    def registrar(cliente):
+    def registrar(Cliente):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -22,12 +22,12 @@ class ClienteRepository:
 
         try:
             cursor.execute(sql, (
-                cliente.getDniCliente(),
-                cliente.getNombresCliente(),
-                cliente.getApellidoPaternoCliente(),
-                cliente.getApellidoMaternoCliente(),
-                cliente.getDireccionCliente(),
-                cliente.getTelefonoCliente()
+                Cliente.getDniCliente(),
+                Cliente.getNombresCliente(),
+                Cliente.getApellidoPaternoCliente(),
+                Cliente.getApellidoMaternoCliente(),
+                Cliente.getDireccionCliente(),
+                Cliente.getTelefonoCliente()
             ))
 
             conn.commit()
@@ -56,7 +56,7 @@ class ClienteRepository:
             clientes = []
 
             for fila in cursor.fetchall():
-                clientes.append(cliente(*fila))
+                clientes.append(Cliente(*fila))
             
             return clientes
 
@@ -86,7 +86,7 @@ class ClienteRepository:
             clientes = []
 
             for fila in cursor.fetchall():
-                clientes.append(cliente(*fila))
+                clientes.append(Cliente(*fila))
             return clientes
 
         except Exception as e:
@@ -98,7 +98,7 @@ class ClienteRepository:
             conn.close()
     
     @staticmethod
-    def modificar(cliente):
+    def modificar(Cliente):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -115,12 +115,12 @@ class ClienteRepository:
 
         try:
             cursor.execute(sql, (
-                cliente.getNombresCliente(),
-                cliente.getApellidoPaternoCliente(),
-                cliente.getApellidoMaternoCliente(),
-                cliente.getDireccionCliente(),
-                cliente.getTelefonoCliente(),
-                cliente.getDniCliente()
+                Cliente.getNombresCliente(),
+                Cliente.getApellidoPaternoCliente(),
+                Cliente.getApellidoMaternoCliente(),
+                Cliente.getDireccionCliente(),
+                Cliente.getTelefonoCliente(),
+                Cliente.getDniCliente()
             ))
             conn.commit()
             return True

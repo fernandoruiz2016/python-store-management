@@ -1,6 +1,6 @@
 from config.database import get_connection
 
-def crearTablas():
+def crear_Tablas():
     conexion = get_connection()
     cursor = conexion.cursor()
 

@@ -1,4 +1,4 @@
-class cliente():
+class Cliente():
 
     #Atributos Encapsulados (Privados)
     __dniCliente =""; __nombresCliente= ""

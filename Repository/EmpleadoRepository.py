@@ -1,10 +1,10 @@
 from config.database import get_connection
-from Modelo.empleados import empleado
+from Modelo.empleado import Empleado
 
 class EmpleadoRepository:
 
     @staticmethod
-    def registrar(empleado):
+    def registrar(Empleado):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -22,12 +22,12 @@ class EmpleadoRepository:
 
         try:
             cursor.execute(sql, (
-                empleado.getDniEmpleado(),
-                empleado.getNombresEmpleado(),
-                empleado.getApellidoPaternoEmpleado(),
-                empleado.getApellidoMaternoEmpleado(),
-                empleado.getDireccionEmpleado(),
-                empleado.getTelefonoEmpleado()
+                Empleado.getDniEmpleado(),
+                Empleado.getNombresEmpleado(),
+                Empleado.getApellidoPaternoEmpleado(),
+                Empleado.getApellidoMaternoEmpleado(),
+                Empleado.getDireccionEmpleado(),
+                Empleado.getTelefonoEmpleado()
             ))
 
             conn.commit()
@@ -56,7 +56,7 @@ class EmpleadoRepository:
             empleados = []
 
             for fila in cursor.fetchall():
-                empleados.append(empleado(*fila))
+                empleados.append(Empleado(*fila))
             
             return empleados
 
@@ -86,7 +86,7 @@ class EmpleadoRepository:
             empleados = []
 
             for fila in cursor.fetchall():
-                empleados.append(empleado(*fila))
+                empleados.append(Empleado(*fila))
             return empleados
 
         except Exception as e:
@@ -98,7 +98,7 @@ class EmpleadoRepository:
             conn.close()
     
     @staticmethod
-    def modificar(empleado):
+    def modificar(Empleado):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -115,12 +115,12 @@ class EmpleadoRepository:
 
         try:
             cursor.execute(sql, (
-                empleado.getNombresEmpleado(),
-                empleado.getApellidoPaternoEmpleado(),
-                empleado.getApellidoMaternoEmpleado(),
-                empleado.getDireccionEmpleado(),
-                empleado.getTelefonoEmpleado(),
-                empleado.getDniEmpleado()
+                Empleado.getNombresEmpleado(),
+                Empleado.getApellidoPaternoEmpleado(),
+                Empleado.getApellidoMaternoEmpleado(),
+                Empleado.getDireccionEmpleado(),
+                Empleado.getTelefonoEmpleado(),
+                Empleado.getDniEmpleado()
             ))
             conn.commit()
             return True

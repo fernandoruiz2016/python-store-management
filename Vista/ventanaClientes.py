@@ -4,7 +4,7 @@
 from PyQt5 import QtWidgets ,uic
 from PyQt5 import QtGui
 
-from Controlador.ClienteController import ClienteController
+from Controlador.clienteController import ClienteController
 
 # QtGui --> utiliza los botones del formulario
 

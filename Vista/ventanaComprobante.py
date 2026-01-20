@@ -6,7 +6,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import QDate
 import re
 
-from Controlador.ComprobanteController import ComprobanteController
+from Controlador.comprobanteController import ComprobanteController
 
 # QtGui --> usiliza los botones del formulario
 

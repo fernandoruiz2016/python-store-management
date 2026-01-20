@@ -1,10 +1,10 @@
 from config.database import get_connection
-from Modelo.productos import producto
+from Modelo.producto import Producto
 
 class ProductoRepository:
 
     @staticmethod
-    def registrar(producto):
+    def registrar(Producto):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -25,15 +25,15 @@ class ProductoRepository:
 
         try:
             cursor.execute(sql, (
-                producto.getCodigoProducto(),
-                producto.getNombreProducto(),
-                producto.getDescripcionProducto(),
-                producto.getStockMinimo(),
-                producto.getStockActual(),
-                producto.getPrecioCosto(),
-                producto.getPrecioVenta(),
-                producto.getProveedor(),
-                producto.getAlmacen()
+                Producto.getCodigoProducto(),
+                Producto.getNombreProducto(),
+                Producto.getDescripcionProducto(),
+                Producto.getStockMinimo(),
+                Producto.getStockActual(),
+                Producto.getPrecioCosto(),
+                Producto.getPrecioVenta(),
+                Producto.getProveedor(),
+                Producto.getAlmacen()
             ))
 
             conn.commit()
@@ -62,7 +62,7 @@ class ProductoRepository:
             productos = []
 
             for fila in cursor.fetchall():
-                productos.append(producto(*fila))
+                productos.append(Producto(*fila))
             
             return productos
 
@@ -92,7 +92,7 @@ class ProductoRepository:
             productos = []
 
             for fila in cursor.fetchall():
-                productos.append(producto(*fila))
+                productos.append(Producto(*fila))
             return productos
 
         except Exception as e:
@@ -104,7 +104,7 @@ class ProductoRepository:
             conn.close()
     
     @staticmethod
-    def modificar(producto):
+    def modificar(Producto):
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -124,15 +124,15 @@ class ProductoRepository:
 
         try:
             cursor.execute(sql, (
-                producto.getNombreProducto(),
-                producto.getDescripcionProducto(),
-                producto.getStockMinimo(),
-                producto.getStockActual(),
-                producto.getPrecioCosto(),
-                producto.getPrecioVenta(),
-                producto.getProveedor(),
-                producto.getAlmacen(),
-                producto.getCodigoProducto(),
+                Producto.getNombreProducto(),
+                Producto.getDescripcionProducto(),
+                Producto.getStockMinimo(),
+                Producto.getStockActual(),
+                Producto.getPrecioCosto(),
+                Producto.getPrecioVenta(),
+                Producto.getProveedor(),
+                Producto.getAlmacen(),
+                Producto.getCodigoProducto(),
             ))
             conn.commit()
             return True

@@ -1,4 +1,4 @@
-class producto():
+class Producto():
 
     #Atributos Encapsulados (Privados)
     __codigoProducto = ""; __nombreProducto= ""

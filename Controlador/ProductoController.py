@@ -1,5 +1,5 @@
-from Repository.ProductoRepository import ProductoRepository
-from Modelo.productos import producto
+from Repository.productoRepository import ProductoRepository
+from Modelo.producto import Producto
 
 class ProductoController():
 
@@ -12,7 +12,7 @@ class ProductoController():
         if not codigo:
             raise ValueError("Código obligatorio")
         
-        pro = producto(
+        pro = Producto(
             codigo,
             nombre, 
             descripcion, 
@@ -47,7 +47,7 @@ class ProductoController():
         if not codigo:
             raise ValueError("Código obligatorio")
         
-        pro = producto(
+        pro = Producto(
             codigo,
             nombre, 
             descripcion, 
