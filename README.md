@@ -105,6 +105,8 @@ Asegúrate de configurar las variables de entorno para la conexión a la base de
    DB_PORT
    ```
 
+---
+
 ## 👤 Autor
 
 Fernando Ruiz
