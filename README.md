@@ -11,27 +11,33 @@ El sistema cuenta con las siguientes opciones:
 
 ### Login (Inicio de Sesión)
 - Login de acceso al programa (las credenciales son usuario: admin y contraseña: 123456).
+![Pantalla de Login](images/login.png)
 
 ### Ventana Principal
 - Punto de acceso central a todas las funcionalidades del sistema.
 - Permite navegar entre clientes, empleados, productos y comprobantes.
+![Ventana Principal](images/principal.png)
 
 ### Gestión de Clientes
 - Registro de clientes.
 - Actualización y eliminación de clientes.
+![Gestión de Clientes](images/clientes.png)
 
 ### Gestión de Empleados
 - Registro de empleados.
 - Actualización y eliminación de empleados.
+![Gestión de Empleados](images/empleados.png)
 
 ### Gestión de Productos
 - Registro de productos.
 - Control de precios y stock.
 - Modificación y eliminación de productos.
+![Gestión de Productos](images/productos.png)
 
 ### Gestión de Comprobantes
 - Registro de comprobantes.
 - Modificación y eliminación de comprobantes.
+![Gestión de Comprobantes](images/comprobantes.png)
 
 ---
 ## Tecnologías Utilizadas
